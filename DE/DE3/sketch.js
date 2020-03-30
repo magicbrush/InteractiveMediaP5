@@ -1,9 +1,10 @@
 var S = 15;
 var num = 1000;
 var X,Y;
-var a = 0.40;
-var b = 1.2;
-var dt = 0.033;
+var a = 1.5;
+var b =1;
+var dt = 0.045;
+var zoom = 0.8;
 
 // 函数setup() ：准备阶段
 function setup() {
@@ -13,7 +14,7 @@ function setup() {
 	for(var i=0;i<num;i++)
 	{
 		X[i] = random(-S,S);
-		Y[i] = random(-S,S);
+		Y[i] = random(-3.14,3.14);
 	}
 }
 
@@ -29,17 +30,17 @@ function StepDE(dt)
 {
 	for(var i=0;i<num;i++)
 	{
-		var x = X[i];
-		var y = Y[i];
+		var r = X[i];
+		var theta = Y[i];
 
-		var dx = sin(a*y)*dt;
-		var dy = cos(b*x)*dt;
+		var dr = sin(a*theta)*dt;
+		var dtheta = 0.33*cos(b*r)*dt;
 
-		x += dx;
-		y += dy;
+		r += dr;
+		theta += dtheta;
 
-		X[i] = x;
-		Y[i] = y;
+		X[i] = r;
+		Y[i] = theta;
 	}
 }
 
@@ -47,11 +48,15 @@ function drawParticles()
 {
 	push();
 	translate(width/2,height/2);
-	scale(width/24,height/24);
+	scale(zoom*width/12,zoom*height/12);
 	strokeWeight(0.02);
 	for(var i=0;i<num;i++)
 	{
-		ellipse(X[i],Y[i],0.2,0.2);
+		var r = X[i];
+		var theta = Y[i];
+		var x = r*sin(theta);
+		var y = r*cos(theta);
+		ellipse(x,y,0.2,0.2);
 	}
 	pop();
 }

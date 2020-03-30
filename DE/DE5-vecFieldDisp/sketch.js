@@ -23,10 +23,10 @@ function setup() {
 		DX[i] = 0;
 		DY[i] = 0;
 		Color[i] = color(
-			random(125,255),
-			random(125,255),
-			random(125,255),
-			random(180,240));
+			random(200,255),
+			random(200,255),
+			random(200,255),
+			random(200,250));
 	}
 }
 
@@ -36,6 +36,37 @@ function draw() {
 
 	StepDE(dt);
 	drawParticles();
+	drawVField();
+}
+
+function drawVField()
+{
+	var arrayNum =32;
+	var step = 2*S/arrayNum;
+	translate(width/2,height/2);
+	for(var i=0;i<arrayNum;i++)
+	{
+		for(var j=0;j<arrayNum;j++)
+		{
+			push();
+			scale(zoom*width/12,zoom*height/12);
+			translate(-S+i*step, -S+j*step);
+			fill(0);
+			strokeWeight(0.01);
+			var x = -S + i*step;
+			var y = -S + j*step;
+			var vx = 0.5*sin(a*y);
+			var vy = 0.5*sin(b*x);
+			var spd = sqrt(vx*vx + vy*vy);
+			var theta = atan2(vy,vx);
+			rotate(theta)
+			line(-spd,0,spd,0);
+			triangle(0.1,0.2*spd,0.1,-0.2*spd,spd,0);
+			pop();
+		}
+	}
+	
+
 }
 
 function StepDE(dt)
@@ -63,7 +94,9 @@ function drawParticles()
 	push();
 	translate(width/2,height/2);
 	scale(zoom*width/12,zoom*height/12);
-	strokeWeight(0.02);
+	//strokeWeight(0.02);
+	noStroke();
+	strokeWeight(0);
 	for(var i=0;i<num;i++)
 	{
 		var dx = DX[i];
