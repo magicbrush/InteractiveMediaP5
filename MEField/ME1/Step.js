@@ -1,8 +1,8 @@
 // 细胞阵列的更新
 var tNow = 0;
 var mu = 1;
-var epslon = 1;
-var k = 2;
+var epslon = 0.05;
+var k = 1;
 
 function Step(dt)
 {

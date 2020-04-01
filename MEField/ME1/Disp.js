@@ -91,3 +91,27 @@ function drawE(E, interval, bias01, scaleF)
 
 }
 
+
+function drawE_Points(E)
+{
+	push();
+	colorMode(RGB,1,1,1,1);
+	noFill();
+	for(var c=0;c<E.length;c++)
+	{
+		for(var r=0;r<E[c].length;r++)
+		{
+			var evec = E[c][r];
+			print("evec.x:" + evec.x + " y:" + evec.y);
+			var ex = evec.x;
+			var ey = evec.y;
+
+			var r = map(ex,-1,1,0,1);
+			var g = map(ey,-1,1,0,1);
+			fill(r,g,0,1);
+			point(c,r);
+		}
+	}
+	pop();
+}
+
