@@ -5,23 +5,32 @@ var A1; // 1-order
 // 细胞阵列的更新
 var K; // elastic factors
 var R;
+var Decay;
 
 var w = 200;
 var h = 200;
 var dt = 0.05;
+var stirPower = 100;
+var n0 = 7;
+
+var nScale = 0.02;
+var nMin = -20;
+var nMax =20.0;
 
 function setup() {
 	createCanvas(w,h);
 	A0 = CreateCellArray(w,h);
-	A0[20][180] = 100;
 	A1 = CreateCellArray(w,h);
-
 	K = CreateCellArray(w,h);
-	K = ApplyCells_Value(K,10);
-	K = InitF_1(5,K);
+	K = ApplyCells_Value(K,n0);
+	K = InitF_Noise(K,nScale,nScale,0,0,nMin,nMax);
 	R = CreateCellArray(w,h);
-	R = ApplyCells_Value(R,10);
-	R = InitF_1(5,R);
+	R = ApplyCells_Value(R,n0);
+	R = InitF_Noise(R,nScale,nScale,0,0,nMin,nMax);
+	Decay = CreateCellArray(w,h);
+	Decay = ApplyCells_Value(Decay,0.9999);
+	Decay = ApplyValueToBound(Decay,10,0.95);
+	//InitResonators();
 }
 
 // 函数draw()：作画阶段
@@ -42,6 +51,21 @@ function draw() {
 	{
 		Step(dt);
 	}
+
+	//ResonatorVib(tNow);
+
+}
+
+function mousePressed()
+{
+	A0[mouseX][mouseY] = stirPower;
+}
+
+function keyPressed() {
+	print(keyCode);
+    if (key === 'A') {
+    	ClearA0A1();
+    } 
 }
 
 
