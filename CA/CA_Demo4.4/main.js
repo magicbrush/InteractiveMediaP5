@@ -11,7 +11,8 @@ function draw() {
 	rect(-1,-1,width+2,height+2);
 	//ellipse(100,100,200,200); // 画圆形
 
-	RenderFloatArray(C);// 2 显示阵列
+	CDisp = LerpC(CDisp,C,0.05);
+	RenderFloatArray(CDisp);// 2 显示阵列
 
 	if(stepPeriod<=0)
 	{
