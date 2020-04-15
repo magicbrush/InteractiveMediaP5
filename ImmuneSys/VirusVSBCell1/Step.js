@@ -1,4 +1,4 @@
-
+// 每个b细胞活动
 function StepAgents(dt)
 {
 	for(var j=0;j<BCells.length;j++)

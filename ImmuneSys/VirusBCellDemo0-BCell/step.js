@@ -1,12 +1,10 @@
-function step(dt)
+function stepField(dt)
 {
 	// 1 扩散：以热传导方式扩散
-	
-	Virus = 
-		Diffuse(dt,Virus,virusDiffuse);
+	/*Virus = 
+		Diffuse(dt,Virus,virusDiffuse);*/
 	Antibody = 
 		Diffuse(dt,Antibody,antiDiffuse);
-
 
 	// 2 反应：抗体清除病毒，且抗体消耗
 	// 2.1 病毒被抗体清除
@@ -18,28 +16,27 @@ function step(dt)
 	Virus = CopyField(Virus2);
 	Antibody = CopyField(Antibody2);
 		
-
 	// 3 持续的增减：按指数方式增/衰减
 	// 3.1 病毒持续感染
-	
+	/*
 	Virus = IncreaseToMax(
 		dt,
 		virusIncRate,
 		Virus,
-		virusMax);
+		virusMax);*/
 		
 
 	// 3.2 抗体随病毒量而制造出来
 	// 病毒越多，抗体制作速率越快；
 	// 免疫能力越强，抗体制造速率越快；
 	// 抗体载量越大，抗体制造速率降低；
-	
+	/*
 	Antibody = IncreaseWith(
 		dt, 
 		Antibody, 
 		Virus, 
 		anitProductionRate, 
-		antiMax);
+		antiMax);*/
 		
 
 }
@@ -129,6 +126,7 @@ function Kill(dt, Killer, Killee, effect)
 			killAmt = constrain(killAmt,0,1);
 
 			Kee2[i][j] = Killee[i][j] - killAmt;
+			Kee2[i][j] = constrain(Kee2[i][j],0,1000);
 		}
 	}
 

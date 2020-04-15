@@ -56,7 +56,10 @@ function setup() {
 		v = v.normalize()
 		v = v.mult(8);
 		var prodSpd = 10.0;
+		// 构造一个B细胞个体B，
+		// 具有一组属性和能力
 		B = {
+			// 属性
 		  	position: p, 
 		  	velocity: v,
 		  	productionSpd: prodSpd,
@@ -64,6 +67,7 @@ function setup() {
 		  	seekRadius: 30,
 		  	maxSpd:8,
 		  	maxAcc:5,
+		  	// 能力
 		  	render: function() 
 		  	{  
 	    		push();
@@ -199,7 +203,6 @@ function draw() {
 	StepFields(dt);
 	StepAgents(dt);
 	
-
 	if(mouseIsPressed)
 	{
 		var xy = createVector(mouseX,mouseY);
