@@ -10,7 +10,7 @@ var zoom = 0.5;
 
 // 函数setup() ：准备阶段
 function setup() {
-	createCanvas(800,800);
+	createCanvas(800,800); 
 	X = new Array();
 	Y = new Array();
 	DX = new Array();

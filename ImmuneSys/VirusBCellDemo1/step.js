@@ -1,29 +1,33 @@
-function step(dt)
+function stepField(dt)
 {
-	// 扩散：基于热扩散方程
+	// 1 扩散：基于热扩散方程
 	Virus = Diffuse(dt,Virus, virusDiffuse);
 	Antibody = Diffuse(dt,Antibody,antiDiffuse);
 
-	// 杀毒：病毒被抗体清除，且抗体也消耗
+	// 2 杀毒：病毒被抗体清除，且抗体也消耗
 	Virus = 
 		Kill(dt, Antibody, Virus, antiEffect);
 	Antibody = 
 		Kill(dt, Virus, Antibody, antiExhaust);
 
-	// 增殖：
+	// 3 增殖：
 	// 病毒向载量极限增加
 	Virus = IncreaseToMax(
 		dt, Virus, VirusMax, virusIncRate);
 
-	// 抗体随病毒量而制造
+	// 抗体随病毒量而制造：
+	// 每个细胞都有免疫力,
+	// 会根据感染的严重程度，
+	// 制造抗体
+	/*
 	Antibody = IncreaseWith(
 		dt, 
 		Antibody,
 		Virus,
 		AntiMax, 
 		antiIncRate);
-
-
+		*/
+		
 }
 
 function IncreaseWith(dt, F, E, maxAmt, incRate)

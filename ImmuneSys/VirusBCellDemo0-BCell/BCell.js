@@ -51,7 +51,8 @@ function BCellProduceAntibody(dt)
 	{
 		var p = BCellPos[i];
 		AddAtCanvas(
-			Antibody, 100*dt, antiMax, p.x,p.y);
+			Antibody, 0.01*dt, antiMax, p.x,p.y);
+
 	}
 }
 
