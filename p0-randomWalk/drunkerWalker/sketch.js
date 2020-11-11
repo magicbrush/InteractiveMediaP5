@@ -1,7 +1,7 @@
 var drunkers;
 var drunkerNum = 10000;
-var startX = 400;// 起始位置
-var goalX = 410; // 家的位置
+var startX = 0;// 起始位置
+var goalX = 100; // 家的位置
 
 // 函数setup() ：准备阶段
 function setup() {
@@ -11,7 +11,7 @@ function setup() {
 	for(let i =0;i<drunkerNum;i++)
 	{
 		var x = startX;
-		var y = 250;
+		var y = 0;
 		drunkers[i] = createVector(x,y);
 	}
 
@@ -24,9 +24,8 @@ function draw() {
 	noFill();
 	rect(0,0,width-1,height-1);
 
-	
 
-	//ellipse(250,250,50,50);
+	// 醉鬼移动&显示
 	var count = drunkers.length;
 	for(let i=0;i<drunkers.length;i++)
 	{
@@ -47,14 +46,21 @@ function draw() {
 		{
 			fill(0,255,0);
 		}
+		push();
+		translate(width/2,height/2);
 		ellipse(drunkers[i].x,drunkers[i].y,5,5);
+		pop();
 
 	}
 
 
-	
-	line(goalX,0,goalX,500);
+	// 画出“家”的位置
+	push();
+	translate(width/2,height/2);
+	line(goalX,-500,goalX,500);
+	pop();
 
+	// 显示到达家的醉鬼数量
 	textSize(32);
 	fill(0);
 	var txt = "arrived: " + count + "/" + drunkers.length;
