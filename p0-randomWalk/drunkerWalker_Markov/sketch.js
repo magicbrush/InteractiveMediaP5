@@ -5,8 +5,8 @@ var startX = -200;// 起始位置
 var goalX = 240; // 家的位置
 var maxStep = 5.0; // 每一步的最大距离
 var normalStep = 1.0;// 正常的步伐
-var p = 0.01;
-var q = 0.05;
+var p = 0.3;
+var q = 0.3;
 var dispSize = 10.0;
 
 // 函数setup() ：准备阶段

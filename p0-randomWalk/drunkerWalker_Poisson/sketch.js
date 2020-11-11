@@ -1,12 +1,12 @@
 var drunkers;
 var leftTimes;
-var drunkerNum = 5000;
+var drunkerNum = 3000;
 var startX = 0;// 起始位置
 var goalX = 150; // 家的位置
 var maxStep = 15.0; // 每一步的最大距离
 var lamda = 10.0;
 var maxTimeStep = 10.0;
-var dispSize = 10.0;
+var dispSize = 5.0;
 
 // 函数setup() ：准备阶段
 function setup() {
