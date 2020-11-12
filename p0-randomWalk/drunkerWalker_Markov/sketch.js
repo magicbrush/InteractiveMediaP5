@@ -1,5 +1,5 @@
 var drunkers;
-var drunkerStates;
+var drunkerStates;// 每个张三的状态：醉或醒
 var drunkerNum = 1000;
 var startX = -200;// 起始位置
 var goalX = 240; // 家的位置
