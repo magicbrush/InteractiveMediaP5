@@ -1,11 +1,11 @@
 var drunkers;
-var drunkerNum =1000;
-var goalX = 480; // 家的位置
-var a = 0.05;
-var b = 0.08;
-var dispSize = 6;
-
-
+var drunkerStates;
+var drunkerNum = 3000;
+var startX = 0;// 起始位置
+var goalX = 240; // 家的位置
+var dispSize = 8;
+var a = 0.08;
+var b = 0.06;
 
 // 函数setup() ：准备阶段
 function setup() {
@@ -14,10 +14,11 @@ function setup() {
 	drunkers = new Array();
 	for(let i =0;i<drunkerNum;i++)
 	{
-		var x = width/2;
-		var y = height/2;
+		var x = startX;
+		var y = 0;
 		drunkers[i] = createVector(x,y);
 	}
+
 }
 
 // 函数draw()：作画阶段
@@ -46,13 +47,13 @@ function draw() {
 			var tgt = Move(x,y);
 			
 			drunkers[i].x = tgt.x;
-			drunkers[i].y = tgt.y
+			drunkers[i].y = tgt.y;
 
 			count --;
 		}
 		
 		push();
-		//translate(width/2,height/2);
+		translate(width/2,height/2);
 		if(arrived)
 		{
 			fill(0,255,0);
@@ -72,6 +73,8 @@ function draw() {
 	line(goalX,-500,goalX,500);
 	pop();
 
+	
+
 	// 显示到达家的醉鬼数量
 	textSize(32);
 	fill(0);
@@ -82,7 +85,26 @@ function draw() {
 
 }
 
+function drawField(gap,F)
+{
+	var minX = 0.5*width/gap;
+	var minY = 0.5*height/gap;
+	for(x=minX;x<width;x+=gap)
+	{
+		for(y=minY;y<height;y+=gap)
+		{
+			var f = F(x,y);
+			push();
+			translate(x,y);
+			fill(255-f*50,255,255);
+			noStroke();
+			rect(-gap/2,-gap/2,gap,gap);
+			pop();
+			
+		}
 
+	}
+}
 
 function Move(x,y)
 {
@@ -136,26 +158,5 @@ function Move(x,y)
 function Field(x,y)
 {
 	return sin(a*x)*cos(b*y) + 1;
-}
-
-function drawField(gap,F)
-{
-	var minX = gap/2;
-	var minY = gap/2;
-	for(x=minX;x<width;x+=gap)
-	{
-		for(y=minY;y<height;y+=gap)
-		{
-			var f = F(x,y);
-			push();
-			translate(x,y);
-			fill(255-f*50,255,255);
-			noStroke();
-			rect(-gap/2,-gap/2,gap,gap);
-			pop();
-			
-		}
-
-	}
 }
 
