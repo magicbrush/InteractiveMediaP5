@@ -1,6 +1,4 @@
 
-
-
 var GameState = {
 	"Prize": 0,
 	"Choose1":0,
@@ -11,7 +9,6 @@ var stage = 0;
 var winCount = 0;
 var trialCount = 0;
 
-
 // 函数setup() ：准备阶段
 function setup() {
 	createCanvas(400,300);
@@ -19,11 +16,15 @@ function setup() {
 }
 
 // 函数draw()：作画阶段
+
 function draw() {
 	background(255);// 填充白色
+	drawGame();
+	autoPlayGame();
+}
 
-	
-
+function drawGame()
+{
 	if(stage==0)
 	{
 		drawStage("choose 1,2 or 3 by pressing key");
@@ -34,10 +35,11 @@ function draw() {
 	}
 	else if(stage ==2)
 	{
-		drawStage("The Golden is the prize");
+		txt = "The Golden is the prize!";
+		txt += " press any key ..."
+		drawStage(txt);
+		drawResultText();
 	}
-
-	//ellipse(200,200,100,100); // 画圆形
 }
 
 function drawStage(txt)
@@ -56,7 +58,7 @@ function drawStage(txt)
 	{
 		var shift = (GameState.Choose2-2)*gap;
 		var xCh1 = xctr + shift;
-		drawChosen(xCh1,yctr,w-25);
+		drawChosen(xCh1,yctr,w-35);
 	}
 	else if(GameState.Choose1!=0)
 	{
@@ -76,13 +78,12 @@ function drawStage(txt)
 	{
 		var shift = (GameState.Prize-2)*gap;
 		var xPrize = xctr + shift;
-		drawPrize(xPrize,yctr,w-35);
+		drawPrize(xPrize,yctr,w-45);
 	}
 
-
 	text("Win/Trial: " + winCount + "/" + trialCount,20,height-20);
-
 }
+
 
 function drawBox(x,y,w,txt)
 {
@@ -129,6 +130,20 @@ function drawPrize(x,y,w)
 	fill(220,160,0);
 	ellipse(0,0,w,w)
 	pop();
+}
+
+
+function drawResultText()
+{
+	var Win = (GameState.Prize === GameState.Choose2);
+	var resultTxt = Win?"Win!":"Lose";
+	push();
+	textAlign(CENTER);
+	textSize(30);
+	text(resultTxt,width/2,60);
+	pop();
+
+	
 }
 
 function keyPressed()
@@ -232,6 +247,25 @@ function PrintGameState(GState)
 		" Choose1: " + GState.Choose1 + 
 		" Hint: " + GState.Hint +
 		" Choose2: "+ GState.Choose2);
+}
+
+
+
+var leftTime = 0;
+var lastTime = 0;
+var timeStep = 0.8;
+var autoPlay = true;
+function autoPlayGame()
+{
+	var tNow = millis()/1000;
+	var dt = tNow - lastTime;
+	leftTime -= dt;
+	if(leftTime<=0 && autoPlay)
+	{
+		// to be implemented
+	}
+	lastTime = tNow;
+	print("to be implemented");
 }
 
 
