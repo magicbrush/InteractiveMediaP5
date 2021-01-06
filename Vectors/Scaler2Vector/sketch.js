@@ -1,5 +1,7 @@
+// 第一个小球的属性：标量表达
 var x,y; // ball 1 的位置
 var xSpd,ySpd;// ball 1 的速度
+// 第二个小球的属性： 矢量表达
 var pos; // ball 2 的位置
 var vel; // ball 2 的速度
 //var ball2Pos;
@@ -27,6 +29,10 @@ function draw() {
 	// ball 1
 	x += xSpd;
 	y += ySpd;
+
+	/*ball1_position = 
+		ball1_position + ball1_velocity * dt;*/
+
 	if(x>width)
 	{
 		x = x-width;
