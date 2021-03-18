@@ -32,8 +32,8 @@ function setup() {
 		var px = random(0,w);
 		var py = random(0,h);
 		P[i] = createVector(px,py);
-		//PColor[i] = color(random(0,255),random(0,255),random(0,255),30);
-		PColor[i] = color(random(200,255),random(200,255),random(200,255),50);
+		PColor[i] = color(random(0,255),random(0,255),random(0,255),30);
+		//PColor[i] = color(random(200,255),random(200,255),random(200,255),50);
 		//PColor[i] = color(random(0,25),random(0,25),random(0,25),50);
 	}	
 
@@ -54,7 +54,7 @@ function draw() {
 
 	drawParticleArray(P,PColor,5);
 	var res = 16;
-	drawValueArray(B,res,0.5,0.15);
-	drawVec2Array(E,res,0.0,0.66,color(0,0,0,125));	
+	//drawValueArray(B,res,0.5,0.15);
+	//drawVec2Array(E,res,0.0,0.66,color(0,0,0,125));	
 	//drawVec2Array(DE,res,0.0,0.5,color(0,200,0,200));	
 }

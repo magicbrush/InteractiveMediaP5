@@ -78,7 +78,8 @@ function drawE(E, interval, bias01, scaleF)
 			stroke(0,0,0,60);
 			strokeWeight(1);
 			translate(Origin.x,Origin.y,0);
-			rotate(theta * 360/TWO_PI);
+			//rotate(theta * 360/TWO_PI);
+			rotate(theta);
 			scale(S*e.mag(),1,1);
 
 			//ellipse(Origin.x,Origin.y,5,5);

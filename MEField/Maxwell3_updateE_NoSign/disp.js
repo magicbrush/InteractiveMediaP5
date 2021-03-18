@@ -1,5 +1,6 @@
+
 // 渲染
-function drawB(B, interval, bias01, scaleF)
+function drawValueArray(B, interval, bias01, scaleF, alpha01)
 {
 	push();
 	fill(0);
@@ -36,31 +37,8 @@ function drawB(B, interval, bias01, scaleF)
 	pop();
 }
 
-function drawB_Points(B)
-{
-	push();
-	colorMode(RGB,1,1,1,1);
-	noFill();
-	for(var c=0;c<B.length;c++)
-	{
-		for(var r=0;r<B[c].length;r++)
-		{
-			var b = B[c][r];
-			if(b>0)
-			{
-				stroke(10*b,0,0,0.5);
-			}
-			else
-			{
-				stroke(0,0,10*b,0.5);
-			}
-			point(c,r);
-		}
-	}
-	pop();
-}
 
-function drawE(E, interval, bias01, scaleF)
+function drawVec2Array(E, interval, bias01, scaleF, cr)
 {
 	var dispScale = interval*scaleF;
 	var startId = floor(interval*bias01);
@@ -75,11 +53,11 @@ function drawE(E, interval, bias01, scaleF)
 			var Origin = createVector(c,r);
 
 			push();
-			stroke(0,0,0,60);
+			stroke(cr);
 			strokeWeight(1);
 			translate(Origin.x,Origin.y,0);
 			//rotate(theta * 360/TWO_PI);
-			rotate(theta );
+			rotate(theta);
 			scale(S*e.mag(),1,1);
 
 			//ellipse(Origin.x,Origin.y,5,5);
@@ -92,3 +70,16 @@ function drawE(E, interval, bias01, scaleF)
 
 }
 
+function drawParticleArray(P,PColor,Size)
+{
+	for(var i=0;i<P.length;i++)
+	{
+		push();
+		//translate(P[i].x,P[i].y);
+		fill(PColor[i]);
+		noStroke();
+		ellipse(P[i].x,P[i].y,Size,Size);
+		//ellipse(0,0,Size,Size);
+		pop();
+	}
+}

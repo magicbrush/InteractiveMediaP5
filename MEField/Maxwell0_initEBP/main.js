@@ -38,5 +38,5 @@ function draw() {
 
 	drawValueArray(B,20,0.5,0.15);
 	drawVec2Array(E,20,0.0,0.25);	
-	//drawParticleArray(P,4);
+	drawParticleArray(P,4);
 }
