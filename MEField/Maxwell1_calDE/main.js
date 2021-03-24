@@ -45,6 +45,7 @@ function draw() {
 	var v = 0.01*sin(millis()/3000)
 	B = InitValueArray_aXbY(B,u,v);
 	*/
+	
 	DE = CalDEbyB(B,DE,k);
 
 	drawValueArray(B,20,0.5,0.15);
