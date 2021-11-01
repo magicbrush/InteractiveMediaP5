@@ -2,7 +2,45 @@
 let boxes = new Array();
 let h = null;
 let r = null;
+let Sigs = new Array();
 
+function testSVD(){
+    B = new Array();
+    for(var i=0;i<8;i++){
+        B[i] = new Array();
+        for(var j=0;j<10;j++){
+            B[i][j] = random(0,100);
+            
+        }
+    }
+    
+    SVD_Mat(Transpose(B));  
+}
+
+function SVD_Mat(A){
+    const {u,v,q} = SVDJS.SVD(A);
+    
+    Sigs = new Array();
+    for(var i=0;i<q.length;i++){
+        Sigs[i] = q[i];
+    }
+    Sigs = Sigs.sort();
+    Sigs = Sigs.reverse();
+   
+}
+
+function Transpose(A){
+    var m = A.length;
+    var n = A[0].length;
+    var B = new Array();
+    for(var i=0;i<n;i++){
+        B[i] = new Array();
+        for(var j=0;j<m;j++){
+            B[i][j] = A[j][i];
+        }
+    }
+    return B;
+}
 
 // 函数setup() ：准备阶段
 function setup() {
@@ -31,6 +69,7 @@ function setup() {
     r[1].setColor(color(0,255,0,100));
     r[2].setColor(color(0,0,255,100));  
     
+    testSVD();
 }
 
 // 函数draw()：作画阶段
@@ -60,13 +99,47 @@ function draw() {
     //fill(0);
     //text(50,20,20);
     
-    var boxSize = width/40;
+    var boxSize = width/42;
     var ZAryAkr = createVector(width-boxSize*4,boxSize*2);
-    
     var ZAryIStep = createVector(boxSize,0);
     var ZAryJStep = createVector(0,boxSize);
     DispMeasureZValues(
         ZAryAkr,ZAryIStep,ZAryJStep,boxSize);
+    
+    push();
+    
+    for(var i=0;i<r.length;i++){
+        var cr = r[i].getColor();
+        cr.setAlpha(255);
+        
+        var X = ZAryIStep.copy();
+        X = X.mult(i);
+        var Y = ZAryJStep.copy();
+        Y.mult(-1);
+        
+        var pos = p5.Vector.add(ZAryAkr,X);
+        var pos2 = p5.Vector.add(pos,Y);
+        noStroke();
+        fill(cr);
+        circle(pos2.x+boxSize/2,pos2.y,boxSize*0.8);
+        //circle(pos.x+i*boxSize,pos.y,5);
+        //print(pos2);
+    }
+    pop();
+    
+    // disp sigular values
+    var x = width-90;
+    var y = height-10;
+    var xstep = 30;
+    push();
+    strokeWeight(1);
+    stroke(0,255);
+    text("Singular Values:",x,y-18);
+    for(var i=0;i<Sigs.length;i++){
+        text(round(Sigs[i]),x+i*xstep,y);
+    }
+    pop();
+    
 }
 
 function mouseMoved()
@@ -87,18 +160,23 @@ function mousePressed()
 
 function mouseDragged()
 {
+    var A = new Array();
     for(i=0;i<r.length;i++){
         r[i].pointerMove(mouseX,mouseY);
-        r[i].measure(boxes);
+        var DProd = r[i].measure(boxes);
+        A.push(DProd);
+        /*
         if(i==0){
             //r[i].printState();
             abc = r[i].computeVar3(boxes);
             print(abc);
-        }
+        }*/
     }
     
     updateMeasureZValues();
     //DispMeasureZValues();
+    
+    SVD_Mat(Transpose(A));
 }
 
 function mouseReleased()
